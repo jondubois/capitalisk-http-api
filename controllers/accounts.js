@@ -111,12 +111,12 @@ AccountsController.getAccounts = async function(context, next) {
 	filters = _.pickBy(filters, v => !(v === undefined || v === null));
 
 	try {
-		const { lastBlock } = await channel.invoke('chain:getNodeStatus');
+		const { lastBlock } = await channel.invoke('capitalisk:getNodeStatus');
 		const data = await storage.entities.Account.get(filters, options).map(
 			accountFormatter.bind(
 				null,
 				lastBlock.height
-					? await channel.invoke('chain:calculateSupply', {
+					? await channel.invoke('capitalisk:calculateSupply', {
 							height: lastBlock.height,
 					  })
 					: 0,

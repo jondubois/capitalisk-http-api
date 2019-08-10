@@ -34,7 +34,7 @@ let library;
  */
 async function _getForgingStatus(publicKey) {
 	const fullList = await library.channel.invoke(
-		'chain:getForgingStatusForAllDelegates',
+		'capitalisk:getForgingStatusForAllDelegates',
 	);
 
 	if (publicKey && !_.find(fullList, { publicKey })) {
@@ -196,14 +196,14 @@ NodeController.getConstants = async (context, next) => {
 	}
 
 	try {
-		const { lastBlock } = await library.channel.invoke('chain:getNodeStatus');
-		const milestone = await library.channel.invoke('chain:calculateMilestone', {
+		const { lastBlock } = await library.channel.invoke('capitalisk:getNodeStatus');
+		const milestone = await library.channel.invoke('capitalisk:calculateMilestone', {
 			height: lastBlock.height,
 		});
-		const reward = await library.channel.invoke('chain:calculateReward', {
+		const reward = await library.channel.invoke('capitalisk:calculateReward', {
 			height: lastBlock.height,
 		});
-		const supply = await library.channel.invoke('chain:calculateSupply', {
+		const supply = await library.channel.invoke('capitalisk:calculateSupply', {
 			height: lastBlock.height,
 		});
 
@@ -252,7 +252,7 @@ NodeController.getStatus = async (context, next) => {
 			syncing,
 			unconfirmedTransactions,
 			lastBlock,
-		} = await library.channel.invoke('chain:getNodeStatus');
+		} = await library.channel.invoke('capitalisk:getNodeStatus');
 
 		// get confirmed count from cache or chain
 
@@ -333,7 +333,7 @@ NodeController.updateForgingStatus = async (context, next) => {
 	const { forging } = context.request.swagger.params.data.value;
 
 	try {
-		const data = await library.channel.invoke('chain:updateForgingStatus', {
+		const data = await library.channel.invoke('capitalisk:updateForgingStatus', {
 			publicKey,
 			password,
 			forging,
@@ -379,7 +379,7 @@ NodeController.getPooledTransactions = async function(context, next) {
 	filters = _.pickBy(filters, v => !(v === undefined || v === null));
 
 	try {
-		const data = await library.channel.invoke('chain:getTransactionsFromPool', {
+		const data = await library.channel.invoke('capitalisk:getTransactionsFromPool', {
 			type: state,
 			filters: _.clone(filters),
 		});

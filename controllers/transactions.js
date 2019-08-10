@@ -140,7 +140,7 @@ TransactionsController.postTransaction = async function(context, next) {
 	let error;
 
 	try {
-		const data = await channel.invoke('chain:postTransaction', { transaction });
+		const data = await channel.invoke('capitalisk:postTransaction', { transaction });
 
 		if (data.success) {
 			return next(null, {

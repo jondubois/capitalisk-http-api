@@ -65,10 +65,10 @@ async function _getDelegates(filters, options) {
 		options,
 	);
 
-	const { lastBlock } = await channel.invoke('chain:getNodeStatus');
+	const { lastBlock } = await channel.invoke('capitalisk:getNodeStatus');
 
 	const supply = lastBlock.height
-		? await channel.invoke('chain:calculateSupply', {
+		? await channel.invoke('capitalisk:calculateSupply', {
 				height: lastBlock.height,
 		  })
 		: 0;
@@ -86,19 +86,19 @@ async function _getDelegates(filters, options) {
  * @private
  */
 async function _getForgers(filters) {
-	const { lastBlock } = await channel.invoke('chain:getNodeStatus');
+	const { lastBlock } = await channel.invoke('capitalisk:getNodeStatus');
 
-	const lastBlockSlot = await channel.invoke('chain:getSlotNumber', {
+	const lastBlockSlot = await channel.invoke('capitalisk:getSlotNumber', {
 		epochTime: lastBlock.timestamp,
 	});
-	const currentSlot = await channel.invoke('chain:getSlotNumber');
+	const currentSlot = await channel.invoke('capitalisk:getSlotNumber');
 	const forgerKeys = [];
 
-	const round = await channel.invoke('chain:calcSlotRound', {
+	const round = await channel.invoke('capitalisk:calcSlotRound', {
 		height: lastBlock.height + 1,
 	});
 
-	const activeDelegates = await channel.invoke('chain:generateDelegateList', {
+	const activeDelegates = await channel.invoke('capitalisk:generateDelegateList', {
 		round,
 	});
 
@@ -182,7 +182,7 @@ async function _aggregateBlocksReward(filter) {
 
 	try {
 		delegateBlocksRewards = await channel.invoke(
-			'chain:getDelegateBlocksRewards',
+			'capitalisk:getDelegateBlocksRewards',
 			{ filters: params },
 		);
 	} catch (err) {
