@@ -166,12 +166,11 @@ const defaultConfig = {
 	],
 	default: {
 		enabled: true,
-		httpPort: 9000,
+		httpPort: 8010,
 		address: '0.0.0.0',
 		trustProxy: false,
 		access: {
 			public: false,
-			whiteList: ['127.0.0.1'],
 		},
 		ssl: {
 			enabled: false,

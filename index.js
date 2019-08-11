@@ -28,7 +28,7 @@ const { config: defaultConfig } = require('./defaults');
  */
 class CapitaliskHttpAPIModule extends BaseModule {
 	constructor(options) {
-		super(options);
+		super({...defaultConfig.default, ...options});
 		this.httpApi = null;
 	}
 
