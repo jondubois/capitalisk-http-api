@@ -67,10 +67,18 @@ module.exports = class HttpApi {
 
 		// Storage
 		this.logger.debug('Initiating storage...');
-		const storageConfig = await this.channel.invoke(
+		const storageConfigOptions = await this.channel.invoke(
 			'app:getComponentConfig',
 			'storage',
 		);
+		const capitaliskModuleOptions = await this.channel.invoke(
+			'capitalisk:getModuleOptions'
+		);
+		const storageConfig = {
+			...storageConfigOptions,
+			database: capitaliskModuleOptions.database
+		};
+
 		const dbLogger =
 			storageConfig.logFileName &&
 			storageConfig.logFileName === loggerConfig.logFileName
