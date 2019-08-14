@@ -1,6 +1,6 @@
 {
   "name": "capitalisk-http-api",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
   "author": "Jonathan Gros-Dubois",
   "license": "AGPL-3.0",
   "dependencies": {
-    "lisk-framework": "^0.3.0",
+    "lisk-framework": "^0.4.0-alpha.0",
     "swagger-node-runner": "^0.7.3"
   },
   "bugs": {
