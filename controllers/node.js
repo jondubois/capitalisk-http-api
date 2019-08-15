@@ -62,7 +62,9 @@ async function _getNetworkHeight() {
 	if (!peers || !peers.length) {
 		return 0;
 	}
-	const networkHeightCount = peers.reduce((previous, { height }) => {
+	const networkHeightCount = peers.reduce((previous, { modules }) => {
+		const capitalisk = modules ? modules.capitalisk : {};
+		const height = capitalisk.height;
 		const heightCount = previous[height] || 0;
 		previous[height] = heightCount + 1;
 		return previous;
