@@ -70,6 +70,9 @@ async function _getNetworkHeight() {
 		return previous;
 	}, {});
 	const heightCountPairs = Object.entries(networkHeightCount);
+	if (!heightCountPairs.length) {
+		return 0;
+	}
 	const [defaultHeight, defaultCount] = heightCountPairs[0];
 	const { height: networkHeight } = heightCountPairs.reduce(
 		(prev, [height, count]) => {
