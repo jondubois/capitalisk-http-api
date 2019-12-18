@@ -202,8 +202,8 @@ NodeController.getConstants = async (context, next) => {
 	}
 
 	try {
-    const { lastBlock } = await library.channel.invoke('capitalisk:getNodeStatus');
-    const { height } = lastBlock || {};
+		const { lastBlock } = await library.channel.invoke('capitalisk:getNodeStatus');
+		const { height } = lastBlock || {};
 		const milestone = await library.channel.invoke('capitalisk:calculateMilestone', {
 			height,
 		});
