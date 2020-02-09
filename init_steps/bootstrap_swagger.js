@@ -288,7 +288,6 @@ function bootstrapSwagger(app, config, logger, scope, cb) {
 	// Swagger express middleware
 	SwaggerRunner.create(swaggerConfig, (errors, runner) => {
 		if (errors) {
-			console.log('TODO 22222 7777-----', errors);
 			// Ignore unused definition warning
 			errors.validationWarnings = _.filter(
 				errors.validationWarnings,
