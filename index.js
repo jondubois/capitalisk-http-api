@@ -32,6 +32,10 @@ class LDEMLiskHttpAPIModule extends BaseModule {
 		this.httpApi = null;
 	}
 
+	static get dependencies() {
+		return ['ldem_lisk_chain'];
+	}
+
 	static get alias() {
 		return 'ldem_lisk_http_api';
 	}
