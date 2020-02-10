@@ -34,7 +34,7 @@ let library;
  */
 async function _getForgingStatus(publicKey) {
 	const fullList = await library.channel.invoke(
-		'capitalisk:getForgingStatusForAllDelegates',
+		'ldem_lisk_chain:getForgingStatusForAllDelegates',
 	);
 
 	if (publicKey && !_.find(fullList, { publicKey })) {
@@ -55,6 +55,12 @@ async function _getForgingStatus(publicKey) {
  * @returns Number
  * @private
  */
+ /**
+  * Get the network height
+  *
+  * @returns Number
+  * @private
+  */
 async function _getNetworkHeight() {
 	const peers = await library.channel.invoke('network:getPeers', {
 		limit: 100,
@@ -63,9 +69,7 @@ async function _getNetworkHeight() {
 	if (!peers || !peers.length) {
 		return 0;
 	}
-	const networkHeightCount = peers.filter(peer => !!peer.modules).reduce((previous, { modules }) => {
-		const capitalisk = modules ? modules.capitalisk || {} : {};
-		const height = capitalisk.height || 0;
+	const networkHeightCount = peers.reduce((previous, { height }) => {
 		const heightCount = previous[height] || 0;
 		previous[height] = heightCount + 1;
 		return previous;
@@ -202,15 +206,15 @@ NodeController.getConstants = async (context, next) => {
 	}
 
 	try {
-		const { lastBlock } = await library.channel.invoke('capitalisk:getNodeStatus');
+		const { lastBlock } = await library.channel.invoke('ldem_lisk_chain:getNodeStatus');
 		const { height } = lastBlock || {};
-		const milestone = await library.channel.invoke('capitalisk:calculateMilestone', {
+		const milestone = await library.channel.invoke('ldem_lisk_chain:calculateMilestone', {
 			height,
 		});
-		const reward = await library.channel.invoke('capitalisk:calculateReward', {
+		const reward = await library.channel.invoke('ldem_lisk_chain:calculateReward', {
 			height,
 		});
-		const supply = await library.channel.invoke('capitalisk:calculateSupply', {
+		const supply = await library.channel.invoke('ldem_lisk_chain:calculateSupply', {
 			height,
 		});
 
@@ -259,7 +263,7 @@ NodeController.getStatus = async (context, next) => {
 			syncing,
 			unconfirmedTransactions,
 			lastBlock,
-		} = await library.channel.invoke('capitalisk:getNodeStatus');
+		} = await library.channel.invoke('ldem_lisk_chain:getNodeStatus');
 
 		// get confirmed count from cache or chain
 
@@ -340,7 +344,7 @@ NodeController.updateForgingStatus = async (context, next) => {
 	const { forging } = context.request.swagger.params.data.value;
 
 	try {
-		const data = await library.channel.invoke('capitalisk:updateForgingStatus', {
+		const data = await library.channel.invoke('ldem_lisk_chain:updateForgingStatus', {
 			publicKey,
 			password,
 			forging,
@@ -386,7 +390,7 @@ NodeController.getPooledTransactions = async function(context, next) {
 	filters = _.pickBy(filters, v => !(v === undefined || v === null));
 
 	try {
-		const data = await library.channel.invoke('capitalisk:getTransactionsFromPool', {
+		const data = await library.channel.invoke('ldem_lisk_chain:getTransactionsFromPool', {
 			type: state,
 			filters: _.clone(filters),
 		});

@@ -1,5 +1,5 @@
 {
-  "name": "capitalisk-http-api",
+  "name": "ldem-lisk-http-api",
   "version": "1.0.11",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/jondubois/capitalisk-http-api.git"
+    "url": "git+ssh://git@github.com/jondubois/ldem-lisk-http-api.git"
   },
   "keywords": [
     "http",
     "api",
-    "capitalisk",
+    "ldem",
     "lisk"
   ],
   "author": "Jonathan Gros-Dubois",
@@ -23,7 +23,7 @@
     "swagger-node-runner": "^0.7.3"
   },
   "bugs": {
-    "url": "https://github.com/jondubois/capitalisk-http-api/issues"
+    "url": "https://github.com/jondubois/ldem-lisk-http-api/issues"
   },
-  "homepage": "https://github.com/jondubois/capitalisk-http-api#readme"
+  "homepage": "https://github.com/jondubois/ldem-lisk-http-api#readme"
 }

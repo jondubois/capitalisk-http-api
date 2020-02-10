@@ -1,2 +1,2 @@
-# capitalisk-http-api
-HTTP API module for Capitalisk sidechain
+# ldem-lisk-http-api
+HTTP API module for Lisk LDEM module.

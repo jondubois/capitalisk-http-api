@@ -71,12 +71,12 @@ module.exports = class HttpApi {
 			'app:getComponentConfig',
 			'storage',
 		);
-		const capitaliskModuleOptions = await this.channel.invoke(
-			'capitalisk:getModuleOptions'
+		const chainModuleOptions = await this.channel.invoke(
+			'ldem_lisk_chain:getModuleOptions'
 		);
 		const storageConfig = {
 			...storageConfigOptions,
-			database: capitaliskModuleOptions.database
+			database: chainModuleOptions.database
 		};
 
 		const dbLogger =
@@ -112,14 +112,14 @@ module.exports = class HttpApi {
 			Object.assign(this.scope.applicationState, event.data);
 		});
 
-		this.channel.subscribe('capitalisk:blocks:change', async event => {
+		this.channel.subscribe('ldem_lisk_chain:blocks:change', async event => {
 			await this.cleanCache(
 				[CACHE_KEYS_BLOCKS, CACHE_KEYS_TRANSACTIONS],
 				`${event.module}:${event.name}`,
 			);
 		});
 
-		this.channel.subscribe('capitalisk:rounds:change', async event => {
+		this.channel.subscribe('ldem_lisk_chain:rounds:change', async event => {
 			await this.cleanCache(
 				[CACHE_KEYS_DELEGATES],
 				`${event.module}:${event.name}`,
@@ -127,7 +127,7 @@ module.exports = class HttpApi {
 		});
 
 		this.channel.subscribe(
-			'capitalisk:transactions:confirmed:change',
+			'ldem_lisk_chain:transactions:confirmed:change',
 			async event => {
 				const transactions = event.data;
 				// Default keys to clear

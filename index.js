@@ -24,23 +24,23 @@ const { config: defaultConfig } = require('./defaults');
  * Http API module specification
  *
  * @namespace Framework.Modules
- * @type {module.CapitaliskHttpAPIModule}
+ * @type {module.LDEMLiskHttpAPIModule}
  */
-class CapitaliskHttpAPIModule extends BaseModule {
+class LDEMLiskHttpAPIModule extends BaseModule {
 	constructor(options) {
 		super({...defaultConfig.default, ...options});
 		this.httpApi = null;
 	}
 
 	static get alias() {
-		return 'capitalisk_http_api';
+		return 'ldem_lisk_http_api';
 	}
 
 	static get info() {
 		return {
 			author: 'Jonathan Gros-Dubois',
 			version: '1.0.0',
-			name: 'capitalisk-http-api',
+			name: 'ldem-lisk-http-api',
 		};
 	}
 
@@ -69,4 +69,4 @@ class CapitaliskHttpAPIModule extends BaseModule {
 	}
 }
 
-module.exports = CapitaliskHttpAPIModule;
+module.exports = LDEMLiskHttpAPIModule;

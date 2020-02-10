@@ -46,7 +46,7 @@ SignaturesController.postSignature = async function(context, next) {
 	let error;
 
 	try {
-		const data = await channel.invoke('capitalisk:postSignature', { signature });
+		const data = await channel.invoke('ldem_lisk_chain:postSignature', { signature });
 
 		if (data.success) {
 			return next(null, {
