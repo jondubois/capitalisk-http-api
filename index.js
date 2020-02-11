@@ -33,7 +33,7 @@ class LDEMLiskHttpAPIModule extends BaseModule {
 	}
 
 	static get dependencies() {
-		return ['ldem_lisk_chain'];
+		return ['app', 'network', 'ldem_lisk_chain'];
 	}
 
 	static get alias() {
