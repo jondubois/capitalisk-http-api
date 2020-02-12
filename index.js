@@ -17,6 +17,7 @@
 const HttpApi = require('./http_api');
 const BaseModule = require('lisk-framework/src/modules/base_module');
 const { config: defaultConfig } = require('./defaults');
+const pkg = require('./package.json');
 
 /* eslint-disable class-methods-use-this */
 
@@ -43,7 +44,7 @@ class LDEMLiskHttpAPIModule extends BaseModule {
 	static get info() {
 		return {
 			author: 'Jonathan Gros-Dubois',
-			version: '1.0.0',
+			version: pkg.version,
 			name: 'ldem-lisk-http-api',
 		};
 	}
